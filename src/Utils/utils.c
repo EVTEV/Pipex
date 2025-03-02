@@ -20,3 +20,9 @@ void	free_tab(char **tab)
 	}
 	free(tab);
 }
+
+int	p_error(char *msg)
+{
+	perror(msg);
+	return (1);
+}

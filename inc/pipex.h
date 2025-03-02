@@ -4,6 +4,7 @@
 # include "../Libft/inc/libft.h"
 # include <stdio.h>
 # include <sys/wait.h>
+# include <errno.h>
 
 typedef struct s_pipex
 {
@@ -17,7 +18,7 @@ typedef struct s_pipex
 	char	**cmd2_args;
 	char	*cmd1_path;
 	char	*cmd2_path;
-} t_pipex;
+}	t_pipex;
 
 // ---------- Pars ---------- //
 // _____check_args.c_____ //
@@ -34,10 +35,13 @@ void	free_pipex(t_pipex *pipex);
 // _____my_exec.c_____ //
 void	first_child(t_pipex *pipex, char **envp);
 void	second_child(t_pipex *pipex, char **envp);
+int		init_commands(t_pipex *pipex, char **av);
+int		execute_command(t_pipex *pipex, char **envp);
 int		my_exec(t_pipex *pipex, char **av, char **envp);
 
 // ---------- Utils ---------- //
 void	msg_error(char *msg);
 void	free_tab(char **tab);
+int		p_error(char *msg);
 
 #endif
