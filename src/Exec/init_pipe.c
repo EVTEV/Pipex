@@ -19,24 +19,45 @@ void	init_pipex(t_pipex *pipex, char **envp)
 		pipex->env_paths = ft_split(envp[i] + 5, ':');
 }
 
-void	free_pipex(t_pipex *pipex)
+void free_pipex(t_pipex *pipex)
 {
-	if (pipex->infile > 0)
-		close(pipex->infile);
-	if (pipex->outfile > 0)
-		close(pipex->outfile);
-	if (pipex->pipe_fd[0] > 0)
-		close(pipex->pipe_fd[0]);
-	if (pipex->pipe_fd[1] > 0)
-		close(pipex->pipe_fd[1]);
-	if (pipex->cmd1_args)
-		free_tab(pipex->cmd1_args);
-	if (pipex->cmd2_args)
-		free_tab(pipex->cmd2_args);
-	if (pipex->cmd1_path)
-		free(pipex->cmd1_path);
-	if (pipex->cmd2_path)
-		free(pipex->cmd2_path);
-	if (pipex->env_paths)
-		free_tab(pipex->env_paths);
+    int i;
+
+    // Libérer la cmd1
+    if (pipex->cmd1_args)
+    {
+        i = 0;
+        while (pipex->cmd1_args[i])
+            free(pipex->cmd1_args[i++]);
+        free(pipex->cmd1_args);
+    }
+
+    // Libérer la cmd2
+    if (pipex->cmd2_args)
+    {
+        i = 0;
+        while (pipex->cmd2_args[i])
+            free(pipex->cmd2_args[i++]);
+        free(pipex->cmd2_args);
+    }
+
+    // Libérer les chemins
+    if (pipex->cmd1_path)
+        free(pipex->cmd1_path);
+    if (pipex->cmd2_path)
+        free(pipex->cmd2_path);
 }
+
+void free_env_paths(char **env_paths)
+{
+    int i;
+
+    if (!env_paths)
+        return;
+    
+    i = 0;
+    while (env_paths[i])
+        free(env_paths[i++]);
+    free(env_paths);
+}
+

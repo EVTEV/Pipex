@@ -2,7 +2,7 @@ NAME = pipex
 
 MAKEFLAGS = --no-print-directory
 
-LIBFT_DIR = ./LIBFT
+LIBFT_DIR = ./Libft
 LIBFT = $(LIBFT_DIR)/libft.a
 INC_LIBFT = -I$(LIBFT_DIR)/inc
 LIBFT_FLAGS = -L$(LIBFT_DIR) -lft
