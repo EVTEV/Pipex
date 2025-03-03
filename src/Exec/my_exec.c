@@ -17,6 +17,8 @@ void	first_child(t_pipex *pipex, char **envp)
 	if (dup2(pipex->pipe_fd[1], STDOUT_FILENO) < 0)
 		msg_error("dup2 error");
 	close(pipex->pipe_fd[0]);
+	close(pipex->infile);
+	close(pipex->pipe_fd[1]);
 	execve(pipex->cmd1_path, pipex->cmd1_args, envp);
 	perror("execve error");
 	free_pipex(pipex);
@@ -56,6 +58,11 @@ int	init_command(t_pipex *pipex, char **av)
 		perror("Error opening output file");
 	pipex->cmd1_args = ft_split(av[2], ' ');
 	pipex->cmd2_args = ft_split(av[3], ' ');
+	if (!pipex->cmd1_args || !pipex->cmd2_args)
+	{
+		free_pipex(pipex);
+		return (1);
+	}
 	pipex->cmd1_path = find_cmd_path(pipex->cmd1_args[0], pipex->env_paths);
 	pipex->cmd2_path = find_cmd_path(pipex->cmd2_args[0], pipex->env_paths);
 	return (0);

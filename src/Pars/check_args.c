@@ -3,10 +3,7 @@
 int	check_args(int ac)
 {
 	if (ac != 5)
-	{
-		ft_putstr_fd("Error\n Invalid number of arguments\n", 2);
-		return (1);
-	}
+		return (p_error("Error\n Invalid number of arguments\n"));
 	return (0);
 }
 
@@ -16,7 +13,7 @@ int	check_infile(char *infile)
 
 	fd = open(infile, O_RDONLY);
 	if (fd < 0)
-		return (p_error("Error\n in infile"));
+		return (p_error("Error\n Invalid infile\n"));
 	close(fd);
 	return (0);
 }
