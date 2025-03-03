@@ -14,50 +14,43 @@ void	init_pipex(t_pipex *pipex, char **envp)
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
 		i++;
 	if (!envp[i])
-		pipex->env_paths = NULL;
+		pipex->env_path = NULL;
 	else
-		pipex->env_paths = ft_split(envp[i] + 5, ':');
+		pipex->env_path = ft_split(envp[i] + 5, ':');
 }
 
-void free_pipex(t_pipex *pipex)
+void	free_pipex(t_pipex *pipex)
 {
-    int i;
+	int	i;
 
-    // Libérer la cmd1
-    if (pipex->cmd1_args)
-    {
-        i = 0;
-        while (pipex->cmd1_args[i])
-            free(pipex->cmd1_args[i++]);
-        free(pipex->cmd1_args);
-    }
-
-    // Libérer la cmd2
-    if (pipex->cmd2_args)
-    {
-        i = 0;
-        while (pipex->cmd2_args[i])
-            free(pipex->cmd2_args[i++]);
-        free(pipex->cmd2_args);
-    }
-
-    // Libérer les chemins
-    if (pipex->cmd1_path)
-        free(pipex->cmd1_path);
-    if (pipex->cmd2_path)
-        free(pipex->cmd2_path);
+	if (pipex->cmd1_args)
+	{
+		i = 0;
+		while (pipex->cmd1_args[i])
+			free(pipex->cmd1_args[i++]);
+		free(pipex->cmd1_args);
+	}
+	if (pipex->cmd2_args)
+	{
+		i = 0;
+		while (pipex->cmd2_args[i])
+			free(pipex->cmd2_args[i++]);
+		free(pipex->cmd2_args);
+	}
+	if (pipex->cmd1_path)
+		free(pipex->cmd1_path);
+	if (pipex->cmd2_path)
+		free(pipex->cmd2_path);
 }
 
-void free_env_paths(char **env_paths)
+void	free_env_path(char **env_path)
 {
-    int i;
+	int	i;
 
-    if (!env_paths)
-        return;
-    
-    i = 0;
-    while (env_paths[i])
-        free(env_paths[i++]);
-    free(env_paths);
+	if (!env_path)
+		return ;
+	i = 0;
+	while (env_path[i])
+		free(env_path[i++]);
+	free(env_path);
 }
-
