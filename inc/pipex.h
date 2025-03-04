@@ -21,7 +21,7 @@ typedef struct s_pipex
 	int		permission;
 }	t_pipex;
 
-// ---------- Pars ---------- //
+// -------------------- Pars --------------------- //
 // _____check_args.c_____ //
 int		check_args(int ac);
 int		check_infile(char *infile);
@@ -29,20 +29,24 @@ int		check_infile(char *infile);
 char	*find_cmd_path(char *cmd, char **env_path);
 char	**get_env_path(char **envp);
 
-// ---------- Exec ---------- //
+// -------------------- Pipe -------------------- //
 // _____init_pipe.c_____ //
 void	init_pipex(t_pipex *pipex, char **envp);
 void	free_pipex(t_pipex *pipex);
 void	free_env_path(char **env_path);
 
-// _____my_exec.c_____ //
+// -------------------- Exec -------------------- //
+// _____child_process.c_____ //
 void	first_child(t_pipex *pipex, char **envp);
 void	second_child(t_pipex *pipex, char **envp);
+// _____init_command.c_____ //
 int		init_command(t_pipex *pipex, char **av);
-int		execute_command(t_pipex *pipex, char **envp);
+// _____exec_command.c_____ //
+int		exec_command(t_pipex *pipex, char **envp);
+// _____my_exec.c_____ //
 int		my_exec(t_pipex *pipex, char **av, char **envp);
 
-// ---------- Utils ---------- //
+// -------------------- Utils -------------------- //
 void	msg_error(char *msg);
 void	free_tab(char **tab);
 int		p_error(char *msg);

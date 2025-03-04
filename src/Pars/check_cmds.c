@@ -29,7 +29,7 @@ char	**get_env_path(char **envp)
 	int		i;
 
 	path_var = NULL;
-	*path = NULL;
+	path = NULL;
 	i = 0;
 	while (envp[i])
 	{
