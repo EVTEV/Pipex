@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   child_process.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acaes <acaes@student.s19.be>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/05 14:56:24 by acaes             #+#    #+#             */
+/*   Updated: 2025/03/05 14:56:24 by acaes            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/pipex.h"
 
 static void	setup_first_child(t_pipex *pipex)
@@ -47,7 +59,7 @@ void	first_child(t_pipex *pipex, char **envp)
 
 static void	setup_second_child(t_pipex *pipex)
 {
-	int null_fd;
+	int	null_fd;
 
 	if (dup2(pipex->pipe_fd[0], STDIN_FILENO) < 0)
 		return (msg_error("dup2"));
@@ -101,4 +113,3 @@ void	second_child(t_pipex *pipex, char **envp)
 	perror("execve");
 	handle_second_child_exit(pipex, NULL);
 }
-

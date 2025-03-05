@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_command.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acaes <acaes@student.s19.be>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/05 14:56:47 by acaes             #+#    #+#             */
+/*   Updated: 2025/03/05 14:56:47 by acaes            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/pipex.h"
 
 static int	handle_child_processes(t_pipex *pipex, char **envp)
@@ -26,9 +38,9 @@ static int	handle_child_processes(t_pipex *pipex, char **envp)
 
 int	exec_command(t_pipex *pipex, char **envp)
 {
-	int status1;
-	int status2;
-	int exit_status;
+	int	status1;
+	int	status2;
+	int	exit_status;
 
 	if (pipe(pipex->pipe_fd) < 0)
 		return (p_error("Pipe error"));
@@ -44,4 +56,3 @@ int	exec_command(t_pipex *pipex, char **envp)
 		exit_status = 1;
 	return (exit_status);
 }
-

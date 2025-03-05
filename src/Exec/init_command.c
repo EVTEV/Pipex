@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_command.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acaes <acaes@student.s19.be>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/05 14:56:56 by acaes             #+#    #+#             */
+/*   Updated: 2025/03/05 14:56:56 by acaes            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/pipex.h"
 
 static int	setup_file(t_pipex *pipex, char **av)
@@ -52,7 +64,6 @@ int	init_command(t_pipex *pipex, char **av)
 	pipex->cmd1_path = NULL;
 	pipex->cmd2_path = NULL;
 	pipex->permission = 0;
-
 	if (!av[1] || !av[2] || !av[3] || !av[4])
 		return (p_error("Error: Missing arguments"));
 	setup_file(pipex, av);
